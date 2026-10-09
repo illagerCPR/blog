@@ -25,4 +25,12 @@
         <tag>Butterfly</tag>
       </tags>
   </entry>
+  <entry>
+    <title>测试页面</title>
+    <url>/blog/2026/10/09/%E6%B5%8B%E8%AF%95%E9%A1%B5%E9%9D%A2/</url>
+    <content><![CDATA[<p>Hello!<br>你好，该页面用于测试评论功能</p>
+<h2 id="我是谁"><a href="#我是谁" class="headerlink" title="我是谁"></a>我是谁</h2><p>我不知道。</p>
+<h3 id="test"><a href="#test" class="headerlink" title="test"></a>test</h3><p>test.test</p>
+]]></content>
+  </entry>
 </search>
