@@ -10,7 +10,26 @@
   <rights>All rights reserved 2026, 无名之迹</rights>
   <subtitle>博客</subtitle>
   <title>illagerCPR's blog</title>
-  <updated>2026-10-10T15:07:10.000Z</updated>
+  <updated>2026-10-11T06:16:31.017Z</updated>
+  <entry>
+    <author>
+      <name>无名之迹</name>
+    </author>
+    <category term="心得" scheme="https://illagercpr.github.io/blog/categories/%E5%BF%83%E5%BE%97/"/>
+    <category term="Windows-Subsystem-for-Linux" scheme="https://illagercpr.github.io/blog/tags/Windows-Subsystem-for-Linux/"/>
+    <content>
+      <![CDATA[<p>这里简单写一下WSL的使用遇到的状况与解决方案。</p><h1 id="WSLg问题"><a href="#WSLg问题" class="headerlink" title="WSLg问题"></a>WSLg问题</h1><p>WSLg存在无法捕获鼠标的问题，因此在WSL中测试需捕获鼠标的程序（例如Minecraft）就会出现视角移动极为灵敏的问题。解决：对于Minecraft，使用RDPMouse mod。</p><h1 id="WSL虚拟磁盘VHDX"><a href="#WSL虚拟磁盘VHDX" class="headerlink" title="WSL虚拟磁盘VHDX"></a>WSL虚拟磁盘VHDX</h1><p>在如今版本的WSL，不能通过执行</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl <span class="literal">--manage</span> &lt;你的发行版名称&gt; <span class="literal">--set-sparse</span> true <span class="literal">--allow-unsafe</span></span><br></pre></td></tr></table></figure><p>(启用稀疏模式) 来确保VHDX文件定时压缩。无论是出于安全性或可用性，都不应该使用上面的命令。<br>若你在Windows功能勾选了Hyper-V（是的，当前版本WSL安装时自行启用Windows功能时不会自动启用Hyper-V），则可以以管理员权限执行以下指令</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Optimize-VHD</span> <span class="literal">-Path</span> <span class="string">&quot;&lt;你的WSL虚拟磁盘文件路径&gt;&quot;</span> <span class="literal">-Mode</span> full</span><br></pre></td></tr></table></figure><p>手动压缩WSL虚拟磁盘文件</p><h1 id="网络模式选择"><a href="#网络模式选择" class="headerlink" title="网络模式选择"></a>网络模式选择</h1><p>建议选择镜像网络模式，方便直接访问WSL运行的网络服务。</p><h2 id="端口保留问题"><a href="#端口保留问题" class="headerlink" title="端口保留问题"></a>端口保留问题</h2><p>注意Hyper-V可能会保留端口，导致WSL需特定端口的服务无法正常运行。解决方案：<br>执行</p><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh int ipv4 show dynamicport tcp</span><br></pre></td></tr></table></figure><p>检查起始端口是否被Windows莫名其妙重置回1024起始，接着以管理员权限执行</p><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh int ipv4 <span class="built_in">set</span> dynamic tcp <span class="built_in">start</span>=<span class="number">49152</span> num=<span class="number">16384</span></span><br></pre></td></tr></table></figure><p>再重启winnat服务</p><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">net</span> stop winnat</span><br><span class="line"><span class="built_in">net</span> <span class="built_in">start</span> winnat</span><br></pre></td></tr></table></figure><p>现在问题应该解决了。Enjoy！</p><p>最后编辑时间：2026&#x2F;10&#x2F;11 14:14:08 UTC+8</p>]]>
+    </content>
+    <id>https://illagercpr.github.io/blog/2026/10/11/WSL%E4%BD%BF%E7%94%A8%E5%BF%83%E5%BE%97/</id>
+    <link href="https://illagercpr.github.io/blog/2026/10/11/WSL%E4%BD%BF%E7%94%A8%E5%BF%83%E5%BE%97/"/>
+    <published>2026-10-11T05:41:04.000Z</published>
+    <summary>
+      <![CDATA[<p>这里简单写一下WSL的使用遇到的状况与解决方案。</p>
+<h1 id="WSLg问题"><a href="#WSLg问题" class="headerlink"]]>
+    </summary>
+    <title>WSL使用心得</title>
+    <updated>2026-10-11T06:16:31.017Z</updated>
+  </entry>
   <entry>
     <author>
       <name>无名之迹</name>
